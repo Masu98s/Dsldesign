@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/iupac.nomenclature/src" modelPluginID="iupac.nomenclature"
+    modelName="IUPAC" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>IUPAC.ecore</foreignModel>
+  <genPackages prefix="IUPACpackage" disposableProviderFactory="true" ecorePackage="IUPAC.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="IUPAC.ecore#//EncodedName">
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Methan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Ethan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Propan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Butan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Pentan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Hexan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Heptan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Octan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Nonan"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedName/Decan"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="IUPAC.ecore#//EncodedBranchName">
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedBranchName/Methyl"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedBranchName/Ethyl"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedBranchName/Propyl"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//EncodedBranchName/Butyl"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="IUPAC.ecore#//Prefix">
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//Prefix/Mono"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//Prefix/Di"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//Prefix/Tri"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//Prefix/Tetra"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="IUPAC.ecore#//PositionInformation">
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/One"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Four"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Five"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Six"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Seven"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Eight"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Nine"/>
+      <genEnumLiterals ecoreEnumLiteral="IUPAC.ecore#//PositionInformation/Ten"/>
+    </genEnums>
+    <genClasses ecoreClass="IUPAC.ecore#//IUPAC">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//IUPAC/chain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//IUPAC/branch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//IUPAC/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//IUPAC/summaryprefix"/>
+    </genClasses>
+    <genClasses ecoreClass="IUPAC.ecore#//Chain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Chain/encodedName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//Chain/branch"/>
+    </genClasses>
+    <genClasses ecoreClass="IUPAC.ecore#//Position">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Position/digit"/>
+    </genClasses>
+    <genClasses ecoreClass="IUPAC.ecore#//Branch">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Branch/branchName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Branch/mono"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Branch/di"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Branch/tri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//Branch/tetra"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//Branch/summaryprefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//Branch/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IUPAC.ecore#//Branch/branch"/>
+    </genClasses>
+    <genClasses ecoreClass="IUPAC.ecore#//SummaryPrefix">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IUPAC.ecore#//SummaryPrefix/prefix"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

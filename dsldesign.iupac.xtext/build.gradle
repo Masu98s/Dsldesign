@@ -1,0 +1,56 @@
+// (c) dsldesign, wasowski, tberger
+plugins {
+  id "java-library"
+  id "org.xtext.xtend"
+}
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+dependencies {
+  implementation project (':deps-xtext')
+
+  testImplementation "org.junit.jupiter:junit-jupiter-api"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+}
+
+sourceSets {
+  main {
+    java.srcDir 'src/main/xtext-gen'
+    xtendOutputDir = 'src/main/xtend-gen'
+    resources.srcDir 'src/main/xtext-gen'
+  }
+  test {
+    java.srcDir 'src/test/xtext-gen'
+    xtendOutputDir = 'src/test/xtend-gen'
+    resources.srcDir 'src/test/xtext-gen'
+  }
+}
+
+jar {
+  from('model') {
+    into('model')
+  }
+  from(sourceSets.main.allSource) {
+    include '**/*.xtext'
+  }
+  manifest {
+    attributes 'Bundle-SymbolicName': project.name
+  }
+}
+
+task generateXtextLanguage (type: JavaExec) {
+  mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+  classpath = configurations.compileClasspath
+  inputs.file "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+  inputs.file "src/org/xtext/example/mydsl/MyDsl.xtext"
+  outputs.dir "src/main/xtext-gen"
+  args += "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+  args += "-p"
+  args += "rootPath=/${rootProject.projectDir}"
+}
+
+processResources.dependsOn (generateXtextLanguage)
+generateXtext.dependsOn (generateXtextLanguage)
+compileJava.dependsOn (generateXtextLanguage)
+clean.dependsOn (cleanGenerateXtextLanguage)
