@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <!--
 -->
-
 <plugin>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated IUPAC -->
       <package
             uri="http://IUPAC.ecore"
             class="IUPACpackage.IUPACpackagePackage"
-            genModel="model/IUPAC.genmodel"/>
+            genModel="model/iupac.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated iupac -->
+      <package
+            uri="http://www.dsl.design/dsldesign.iupac.xtext"
+            class="dsldesign.IUPACpackage.IUPACpackagePackage"
+            genModel="model/iupac.genmodel"/>
    </extension>
 
 </plugin>
+

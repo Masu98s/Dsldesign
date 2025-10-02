@@ -1,1 +1,21 @@
-/.metadata/
+# Generated code - do not commit
+**/src-gen/
+**/xtend-gen/
+**/bin/
+**/build/
+**/.gradle/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db

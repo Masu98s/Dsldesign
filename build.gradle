@@ -1,0 +1,39 @@
+// (c) dsldesign, wasowski, tberger
+apply from: 'properties.gradle'
+apply plugin: 'eclipse'
+
+/* Create the convenience task 'all' that gathers 'build' tasks from all JVM
+ * projects and 'dotnetBuild' tasks from all .NET projects.  Apparently, this
+ * is not easy to do via available tasks, because when dependencies are set up
+ * the projects are not yet evaluated.  They do not know what tasks they have.
+ * We use a workaround, matching project type by directory name.
+ *
+ * We do the same for 'cleanAll'
+ */
+
+task all { }
+task cleanAll { }
+
+def dotnetExts = [ '.cs' ]
+def nonJvmExts = dotnetExts +
+  [ '.atl', '.epsilon', '.js', '.py', '.qvto', '.figures' ] 
+
+subprojects
+  .findAll { p -> !nonJvmExts.any { p.name.endsWith (it) } }
+  .every { p ->  
+    all.dependsOn ("${p.name}:build")  
+    cleanAll.dependsOn ("${p.name}:clean")  
+}
+
+subprojects
+  .findAll { p -> dotnetExts.any { p.name.endsWith (it) } }
+  .every { p ->  
+    all.dependsOn ("${p.name}:dotnetBuild");
+    cleanAll.dependsOn ("${p.name}:dotnetClean");
+  }
+
+subprojects {
+  tasks.withType (ScalaCompile) {
+    scalaCompileOptions.additionalParameters = ["-feature"]
+  }
+}

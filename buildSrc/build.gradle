@@ -1,0 +1,28 @@
+// (c) dsldesign, wasowski, tberger
+
+plugins {
+  id "scala"
+  id "com.github.maiflai.scalatest" version "0.32"
+}
+
+apply from: "${rootDir.parentFile}/properties.gradle"
+
+dependencies {
+
+  implementation "org.scala-lang:scala3-library_${scalaVersionSuffix}:${scalaVersion}"
+  implementation platform ("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+  implementation 'org.eclipse.emf:org.eclipse.emf.ecore'
+  implementation 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
+  implementation 'org.eclipse.emf:org.eclipse.emf.common'
+  implementation 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
+
+  implementation 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
+  implementation 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
+
+  implementation "org.scalatest:scalatest_${scalaVersionSuffix}:${scalatestVersion}"
+  implementation "com.vladsch.flexmark:flexmark-all:${flexmarkVersion}"
+}
+
+test {
+    enabled = false  // Deaktiviert Tests
+}

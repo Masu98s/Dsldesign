@@ -1,0 +1,16 @@
+// (c) dsldesign, wasowski, tberger
+plugins {
+  id "java-library"
+  id "org.xtext.xtend"
+}
+
+dependencies {
+  api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+
+  api "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
+  api "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
+
+  api "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
+  api "org.junit.jupiter:junit-jupiter-api"
+  api "org.junit.jupiter:junit-jupiter-engine"
+}

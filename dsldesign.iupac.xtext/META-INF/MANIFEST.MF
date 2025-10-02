@@ -1,25 +1,20 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: dsldesign.iupac.xtext
 Bundle-ManifestVersion: 2
-Bundle-Name: dsldesign.iupac.xtext
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: dsldesign.iupac.xtext; singleton:=true
-Bundle-ActivationPolicy: lazy
-Require-Bundle: iupac.nomenclature,
- org.eclipse.xtext,
- org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;bundle-version="3.16.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-Name: %pluginName
+Bundle-SymbolicName: dsldesign.iupac.xtext;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: dsldesign.iupac.xtext.parser.antlr.internal,
- dsldesign.iupac.xtext.scoping,
- dsldesign.iupac.xtext.services,
- dsldesign.iupac.xtext.generator,
- dsldesign.iupac.xtext.validation,
- dsldesign.iupac.xtext,
+Export-Package: dsldesign.iupac.xtext,
  dsldesign.iupac.xtext.formatting2,
- dsldesign.iupac.xtext.serializer,
- dsldesign.iupac.xtext.parser.antlr
-Import-Package: org.apache.log4j
+ dsldesign.iupac.xtext.generator,
+ dsldesign.iupac.xtext.scoping,
+ dsldesign.iupac.xtext.validation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ocl.pivot;visibility:=reexport,
+ org.eclipse.ocl.examples.codegen;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: dsldesign.iupac.xtext

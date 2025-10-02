@@ -10,7 +10,7 @@ dependencies {
 }
 
 tasks.create ('iupacModelCode', GenerateModelCodeTask,
-  'dsldesign.nomenclature/model/IUPAC.genmodel')
+  'dsldesign.nomenclature/model/iupac.genmodel')
 
 clean { dependsOn cleanFsmModelCode }
 compileJava { dependsOn fsmModelCode }

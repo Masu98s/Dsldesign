@@ -11,17 +11,17 @@ Workflow {
 		configuration = {
 			project = StandardProjectConfig {
 				baseName = "dsldesign.iupac.xtext"
-				rootPath = rootPath
+				rootPath = rootPath 
 				eclipsePlugin = {
 					enabled = false
 				}
 			  runtimeTest = {
-					enabled = true
+					enabled = false
 				}
         genericIde = {
           enabled = false
         }
-        mavenLayout = true
+        mavenLayout = false
 				createEclipseMetaData = false
 			}
 			code = {
@@ -31,10 +31,9 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
-			name = "dsldesign.iupac.xtext"
+			name = "org.xtext.example.mydsl.MyDsl"
 			fileExtensions = "iupac"
-			referencedResource = "platform:/resource/dsldesign.iupac/model/iupac.genmodel"
-
+			referencedResource = "file://${rootPath}/dsldesign.iupac/model/iupac.genmodel"
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 
 			formatter = {

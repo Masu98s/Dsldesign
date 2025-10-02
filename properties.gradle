@@ -1,0 +1,32 @@
+// (c) dsldesign, wasowski, tberger
+allprojects {
+
+  version = '0.04'
+
+  ext {
+    emfEditVersion = '2.15.+'
+    flexmarkVersion = '0.64.0'
+    javaVersion = '17'
+    junitVersion = '5.6.0'
+    kiamaVersion = '2.5.0'
+    kotlinVersion = '1.3.71'
+    log4jVersion = '2.17.2'
+    oslibVersion = '0.7.1'
+    paigesVersion = '0.4.2'
+    parboiledVersion = '2.4.0'
+    scalaVersion = '3.1.3'
+    scalaVersionSuffix = '3'
+    scalacheckVersion = '1-16'
+    scalatestVersion = '3.2.12'
+    xtextVersion = '2.26.0'
+    groovyVersion = '2.4.15'
+  }
+
+  repositories {
+    flatDir { dirs 'lib' }
+    maven { url 'https://repo.eclipse.org/content/repositories/acceleo-releases/' }
+    maven { url 'https://github.com/rosjava/rosjava_mvn_repo/raw/master' }
+    mavenCentral()
+  }
+
+}

@@ -4,12 +4,15 @@ plugins {
   id "org.xtext.xtend"
 }
 
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+java {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+}
 
 dependencies {
+  implementation project (path: ':dsldesign.iupac', configuration: 'archives')
   implementation project (':deps-xtext')
-
+	
   testImplementation "org.junit.jupiter:junit-jupiter-api"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
 }
@@ -42,10 +45,10 @@ jar {
 task generateXtextLanguage (type: JavaExec) {
   mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
   classpath = configurations.compileClasspath
-  inputs.file "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
-  inputs.file "src/org/xtext/example/mydsl/MyDsl.xtext"
-  outputs.dir "src/main/xtext-gen"
-  args += "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+  inputs.file "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"  // Changed
+  inputs.file "src/org/xtext/example/mydsl/MyDsl.xtext"         // Changed
+  outputs.dir "src-gen"
+  args += "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"      // Changed
   args += "-p"
   args += "rootPath=/${rootProject.projectDir}"
 }
@@ -54,3 +57,8 @@ processResources.dependsOn (generateXtextLanguage)
 generateXtext.dependsOn (generateXtextLanguage)
 compileJava.dependsOn (generateXtextLanguage)
 clean.dependsOn (cleanGenerateXtextLanguage)
+
+afterEvaluate {
+    tasks.findByName('generateTestXtext')?.enabled = false
+    tasks.findByName('generateXtext')?.enabled = false
+}
