@@ -1,0 +1,55 @@
+// Our adjusted Xtext code
+grammar dsldesign.iupac.xtext.MyDsl
+
+import "http://IUPAC.ecore" 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+IUPAC returns IUPAC:
+	{IUPAC} //IUPAC class is mandatory to Object instantiation of EOL or Chain.   
+	EOL*
+	((chain+=Chain)EOL+)*;
+	
+Chain returns Chain:
+	{Chain} //Chain class is mandatory, to derive a correct IUPAC name. 
+		((branch+=Branch) ("-" branch+=Branch)*)? //Provide more branches with different lengths 
+ 		encodedName=EncodedName;
+		
+enum EncodedName returns EncodedName:
+	Methan = 'Methan' | Ethan = 'Ethan' | Propan = 'Propan' | 
+	Butan = 'Butan' | Pentan = 'Pentan' | Hexan = 'Hexan' | 
+	Heptan = 'Heptan' | Octan = 'Octan' | Nonan = 'Nonan' | 
+	Decan = 'Decan';
+
+Branch returns Branch:
+	(position +=Position ("," position += Position)*) "-" 
+	("("branch=Branch")")? //Nested branches
+	summaryprefix=SummaryPrefix
+	branchName=EncodedBranchName;
+
+enum EncodedBranchName returns EncodedBranchName:
+	Methyl = 'Methyl' | Ethyl = 'Ethyl' | Propyl = 'Propyl' | Butyl = 'Butyl';
+
+SummaryPrefix returns SummaryPrefix:
+	prefix=Prefix;
+
+Position returns Position:
+	digit=PositionInformation;
+
+enum Prefix returns Prefix:
+	Mono = 'Mono' | Di = 'Di' | Tri = 'Tri' | Tetra = 'Tetra';
+
+enum PositionInformation returns PositionInformation:
+	One = '1' | Two = '2' | Three = '3' | Four = '4' | 
+	Five = '5' | Six = '6' | Seven = '7' | 
+	Eight = '8' | Nine = '9' | Ten = '10';
+
+//EOL means end of line. 
+//Here we realize that every IUPAC name is completed when a new line begins or a comment is attached at the end of the IUPAC name. 
+EOL:
+	NEWLINE | SL_COMMENT;
+
+terminal SL_COMMENT:
+	'//' !('\n'|'\r')* ('\r'? '\n')?;
+	
+terminal NEWLINE:
+	('\r'? '\n');

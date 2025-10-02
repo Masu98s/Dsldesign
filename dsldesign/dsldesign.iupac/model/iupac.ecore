@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="IUPACpackage" nsURI="http://IUPAC.ecore" nsPrefix="IUPAC">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="IUPAC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chain" upperBound="-1"
+        eType="#//Chain" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" upperBound="-1"
+        eType="#//Branch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" upperBound="-1"
+        eType="#//Position" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="summaryprefix" upperBound="-1"
+        eType="#//SummaryPrefix" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Chain">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="encodedName" eType="#//EncodedName"
+        defaultValueLiteral="Heptan"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" upperBound="2"
+        eType="#//Branch" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Position">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="digit" eType="#//PositionInformation"
+        defaultValueLiteral="Two"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Branch">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="constraint_1"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="constraint_1" value="Tuple {&#xA;&#x9;message : String = 'Summary prefix must be consistent with the number of positions of branches with the same length.',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;(self.summaryprefix.prefix = mono and self.position -> size() = 1)&#xA;&#x9;&#x9;&#x9;or (self.summaryprefix.prefix = di and self.position -> size() = 2)&#xA;&#x9;&#x9;&#x9;or (self.summaryprefix.prefix = tri and self.position -> size() = 3)&#xA;&#x9;&#x9;&#x9;or (self.summaryprefix.prefix = tetra and self.position -> size() = 4)&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="branchName" eType="#//EncodedBranchName"
+        defaultValueLiteral="Methyl"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mono" eType="#//Prefix"
+        defaultValueLiteral="Mono">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Our new attributes"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="di" eType="#//Prefix" defaultValueLiteral="Di"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tri" eType="#//Prefix"
+        defaultValueLiteral="Tri"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tetra" eType="#//Prefix"
+        defaultValueLiteral="Tetra"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="summaryprefix" lowerBound="1"
+        eType="#//SummaryPrefix" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" lowerBound="1"
+        upperBound="4" eType="#//Position" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//Branch"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SummaryPrefix">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="#//Prefix"
+        defaultValueLiteral="Mono"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EncodedName">
+    <eLiterals name="Methan" value="1"/>
+    <eLiterals name="Ethan" value="2"/>
+    <eLiterals name="Propan" value="3"/>
+    <eLiterals name="Butan" value="4"/>
+    <eLiterals name="Pentan" value="5"/>
+    <eLiterals name="Hexan" value="6"/>
+    <eLiterals name="Heptan" value="7"/>
+    <eLiterals name="Octan" value="8"/>
+    <eLiterals name="Nonan" value="9"/>
+    <eLiterals name="Decan" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EncodedBranchName">
+    <eLiterals name="Methyl" value="1"/>
+    <eLiterals name="Ethyl" value="2"/>
+    <eLiterals name="Propyl" value="3"/>
+    <eLiterals name="Butyl" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Prefix">
+    <eLiterals name="Mono" value="1"/>
+    <eLiterals name="Di" value="2"/>
+    <eLiterals name="Tri" value="3"/>
+    <eLiterals name="Tetra" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PositionInformation">
+    <eLiterals name="One" value="1"/>
+    <eLiterals name="Two" value="2"/>
+    <eLiterals name="Three" value="3"/>
+    <eLiterals name="Four" value="4"/>
+    <eLiterals name="Five" value="5"/>
+    <eLiterals name="Six" value="6"/>
+    <eLiterals name="Seven" value="7"/>
+    <eLiterals name="Eight" value="8"/>
+    <eLiterals name="Nine" value="9"/>
+    <eLiterals name="Ten" value="10"/>
+  </eClassifiers>
+</ecore:EPackage>
