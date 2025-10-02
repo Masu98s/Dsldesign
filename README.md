@@ -1,11 +1,11 @@
-# DSLdesign – Xtext Tutorial Project
+# A Domain-specific Language for the IUPAC nomenclature – Xtext project
 
-This repository contains an example project for developing a **Domain-Specific Language (DSL)** using [Xtext](https://www.eclipse.org/Xtext/).  
+This repository contains an example project for developing a **Domain-specific Language (DSL)** using [Xtext](https://www.eclipse.org/Xtext/).  
 It is based on the book *Domain-Specific Languages: Effective Modeling, Automation, and Reuse* by Wąsowski & Berger (2023) and the accompanying **Xtext tutorial**.
 
 ## What this DSL is about
 
-The DSL in this project models a subset of the **IUPAC chemical nomenclature**.  
+The DSL in this project models a subset of the **IUPAC nomenclature**.  
 Its purpose is to encode **organic molecules** (chains and branches of carbon atoms) into structured names following IUPAC rules.
 
 - **Chains** represent the main carbon backbone (e.g., *Butan*, *Heptan*).  
@@ -17,17 +17,17 @@ For example:
 ```
 4-MonoEthyl-2,3-DiMethylHeptan
 ```
-This represents a 7-carbon chain (*Heptan*) with one ethyl group at position 4 and two methyl groups at positions 2 and 3.
+This represents a 7-carbon chain (*Heptan*) with one ethyl branch at position 4 and two methyl branches at positions 2 and 3.
 
 The DSL supports:
-- Syntax checking of IUPAC-style names  
-- Semantic validation rules (e.g., branch names must be sorted, prefix counts must match positions)  
+- Syntax checking of IUPAC names  
+- Semantic validation rules (e.g., branch names must be sorted alphabetically, prefix counts must match positions)  
 - A generated editor with syntax highlighting, code completion, and error feedback
 
 ## Contents
 
 - **Xtext Grammar**  
-  Defines the concrete syntax for the IUPAC DSL.
+  Defines the concrete textual syntax for the IUPAC DSL.
   
 - **Ecore Model**  
   Represents the abstract syntax/metamodel of molecules.
@@ -40,8 +40,7 @@ The DSL supports:
 
 - **Use Cases**  
   - Validation of IUPAC names  
-  - Categorization/grouping of molecules  
-  - Extending the DSL with new rules
+  - Categorization/grouping of IUPAC names  
 
 ## Requirements
 
