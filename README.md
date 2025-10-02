@@ -85,10 +85,7 @@ The editor automatically checks whether the syntax and semantics (e.g., prefixes
 **Metamodel of the IUPAC DSL**  
 ![Metamodel](img/metamodel_iupac.png)
 
-**Generated Xtext editor with autocompletion**  
-![Editor](xtext_images/page6_img2.png)
-
-**Validation of syntactic errors in the editor**  
+**Validation of semantic errors in the editor**  
 ![Validation](img/dsl_editor_ocl_constraint_branch_names.png)
 
 ## References
