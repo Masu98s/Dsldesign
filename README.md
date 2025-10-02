@@ -68,7 +68,7 @@ The DSL supports:
 
 2. **Import the project into Eclipse**  
    - `File → Import → Existing Projects into Workspace`  
-   - Select the project folder `Dsldesign`
+   - Select the project folder `dsldesign.iupac` and `dsldesign.iupac.xtext`
 
 3. **Generate model code**  
    - Navigate to the folder **`model/`**  
