@@ -84,7 +84,7 @@ The editor automatically checks whether the syntax and semantics (e.g., prefixes
 ### Example Screenshots
 
 **Metamodel of the IUPAC DSL**  
-![Metamodel](xtext_images/page4_img1.png)
+![Metamodel](img/metamodel_iupac.png)
 
 **Generated Xtext editor with autocompletion**  
 ![Editor](xtext_images/page6_img2.png)
