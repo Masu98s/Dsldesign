@@ -46,11 +46,11 @@ The DSL supports:
 
 ## Requirements
 
-- **Eclipse IDE** (Modeling edition recommended)  
+- **Eclipse Modeling Tools** [https://www.eclipse.org/downloads/packages/](https://www.eclipse.org/downloads/packages/)
 - **Xtext SDK** (install via Eclipse update site, note that Eclipse will restart)  
 - **EMF (Eclipse Modeling Framework)**  
 - **OCL plugin** (install manually via update site:  
-  [https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0](https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0))  
+  [https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0](https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0) 
 - Java 11 or newer  
 - Maven (optional, for build integration)
 
