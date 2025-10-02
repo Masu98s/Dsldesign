@@ -3,25 +3,45 @@
 This repository contains an example project for developing a **Domain-Specific Language (DSL)** using [Xtext](https://www.eclipse.org/Xtext/).  
 It is based on the book *Domain-Specific Languages: Effective Modeling, Automation, and Reuse* by Wąsowski & Berger (2023) and the accompanying **Xtext tutorial**.
 
+## What this DSL is about
+
+The DSL in this project models a subset of the **IUPAC chemical nomenclature**.  
+Its purpose is to encode **organic molecules** (chains and branches of carbon atoms) into structured names following IUPAC rules.
+
+- **Chains** represent the main carbon backbone (e.g., *Butan*, *Heptan*).  
+- **Branches** represent substituents attached to the chain (e.g., *Methyl*, *Ethyl*).  
+- **Prefixes** (Mono, Di, Tri, Tetra) describe multiple branches of the same type.  
+- **Positions** indicate where branches are attached to the chain.
+
+For example:  
+```
+4-MonoEthyl-2,3-DiMethylHeptan
+```
+This represents a 7-carbon chain (*Heptan*) with one ethyl group at position 4 and two methyl groups at positions 2 and 3.
+
+The DSL supports:
+- Syntax checking of IUPAC-style names  
+- Semantic validation rules (e.g., branch names must be sorted, prefix counts must match positions)  
+- A generated editor with syntax highlighting, code completion, and error feedback
+
 ## Contents
 
 - **Xtext Grammar**  
-  Contains the definition of an example DSL developed with Xtext (including parser, editor, and code generation).
+  Defines the concrete syntax for the IUPAC DSL.
   
 - **Ecore Model**  
-  The metamodel that defines the abstract syntax.
+  Represents the abstract syntax/metamodel of molecules.
 
 - **Generated Editor**  
-  Comes with syntax highlighting, code completion (Ctrl+Space), and validation rules.
+  Provides a text editor for writing molecule descriptions with autocomplete and validation.
 
-- **OCL Examples**  
-  Static semantic checks with OCL (e.g., consistency rules, naming conventions).
+- **OCL Constraints**  
+  Add static semantic checks (e.g., branch names cannot be identical).
 
 - **Use Cases**  
-  Example applications of the DSL, including:
-  - Validation of inputs  
-  - Categorization of IUPAC names  
-  - Extending the metamodel with additional structures
+  - Validation of IUPAC names  
+  - Categorization/grouping of molecules  
+  - Extending the DSL with new rules
 
 ## Requirements
 
@@ -48,19 +68,22 @@ It is based on the book *Domain-Specific Languages: Effective Modeling, Automati
    - Add a file with the extension `.mydsl`  
    - Test autocompletion using `Ctrl+Space`
 
-## Examples
+## Example
 
-A simple input in the DSL could look like this:
-
+**Input:**
 ```
 2-MonoMethylButan
 ```
 
-The editor automatically checks whether the syntax and semantics (e.g., positions, prefixes) are valid.
+**Meaning:**
+- 4-carbon chain (*Butan*)  
+- 1 methyl branch at position 2  
+
+The editor automatically checks whether the syntax and semantics (e.g., prefixes, branch names, positions) are correct.
 
 ### Example Screenshots
 
-**Metamodel of the IUPAC example**  
+**Metamodel of the IUPAC DSL**  
 ![Metamodel](xtext_images/page4_img1.png)
 
 **Generated Xtext editor with autocompletion**  
