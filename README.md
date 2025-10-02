@@ -90,7 +90,7 @@ The editor automatically checks whether the syntax and semantics (e.g., prefixes
 ![Editor](xtext_images/page6_img2.png)
 
 **Validation of syntactic errors in the editor**  
-![Validation](xtext_images/page12_img1.png)
+![Validation](img/dsl_editor_ocl_constraint_branch_names.png)
 
 ## References
 
