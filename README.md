@@ -40,32 +40,49 @@ The DSL supports:
 
 - **Use Cases**  
   - Validation of IUPAC names  
-  - Categorization/grouping of IUPAC names  
+  - Categorization/grouping of IUPAC names
+    
+---
 
 ## Requirements
 
-- **Eclipse IDE** with the following plugins:
-  - [Xtext](https://www.eclipse.org/Xtext/download.html)  
-  - EMF (Eclipse Modeling Framework)
-- Java 11 or higher
-- Maven (optional, if build integration is needed)
+- **Eclipse IDE** (Modeling edition recommended)  
+- **Xtext SDK** (install via Eclipse update site, note that Eclipse will restart)  
+- **EMF (Eclipse Modeling Framework)**  
+- **OCL plugin** (install manually via update site:  
+  [https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0](https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0))  
+- Java 11 or newer  
+- Maven (optional, for build integration)
+
+---
 
 ## Installation & Usage
 
-1. Clone the repository:
+1. **Clone the repository**  
    ```bash
    git clone https://github.com/Masu98s/Dsldesign.git
    ```
-2. Import the project into Eclipse:  
-   `File → Import → Existing Projects into Workspace`
-3. Generate Xtext artifacts:  
-   Right-click the `.xtext` file → **Run As → Generate Xtext Artifacts**
-4. Start the DSL editor:  
-   Right-click the main project → **Run As → Eclipse Application**
-5. Create a new DSL file:  
-   - Create a new project  
-   - Add a file with the extension `.mydsl`  
-   - Test autocompletion using `Ctrl+Space`
+2. **Import the project into Eclipse**  
+   - `File → Import → Existing Projects into Workspace`  
+   - Select the project folder
+3. **Generate model code**  
+   - Right-click the `.genmodel` → *Generate Model Code*
+4. **Create the Xtext project**  
+   - `File → New → Project → Xtext Project From Existing Ecore Models`  
+   - Add the `.genmodel` file  
+   - Select the correct entry rule (root class, e.g. `IUPAC`)  
+5. **Generate Xtext artifacts**  
+   - Right-click the `.xtext` grammar file → *Run As → Generate Xtext Artifacts*
+6. **Launch the DSL editor**  
+   - Right-click the project → *Run As → Eclipse Application*  
+   - A new Eclipse instance will open with the DSL editor installed
+7. **Create and test DSL files**  
+   - In the new Eclipse instance, create a project and add a file with the extension `.mydsl`  
+   - Start writing IUPAC-style names (e.g. `2-MonoMethylButan`)  
+   - Use **Ctrl+Space** for autocompletion  
+   - Errors will be highlighted if the syntax or semantics are incorrect
+
+---
 
 ## Example
 
