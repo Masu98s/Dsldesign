@@ -46,14 +46,17 @@ The DSL supports:
 
 ## Requirements
 
-- **Eclipse Modeling Tools** [https://www.eclipse.org/downloads/packages/](https://www.eclipse.org/downloads/packages/)
-- **Xtext SDK** (install via Eclipse update site, note that Eclipse will restart)  
-- **EMF (Eclipse Modeling Framework)**  
-- **OCL plugin** (install manually via update site:  
-  [https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0](https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0) 
+- **Eclipse Modeling Tools**
+  [https://www.eclipse.org/downloads/packages/](https://www.eclipse.org/downloads/packages/)
+- **OCL plugin** (install manually via update site):  
+  [https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0](https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0)
+  - `Help → Install new Software`  
+- **Xtext SDK** (install via Eclipse update site, note that Eclipse will restart):
+  [https://download.eclipse.org/releases/2021-09/](https://download.eclipse.org/releases/2021-09/)
+  - Search for xtext
+  - `Help → Install new Software`   
 - Java 11 or newer  
 - Maven (optional, for build integration)
-
 ---
 
 ## Installation & Usage
@@ -62,23 +65,35 @@ The DSL supports:
    ```bash
    git clone https://github.com/Masu98s/Dsldesign.git
    ```
+
 2. **Import the project into Eclipse**  
    - `File → Import → Existing Projects into Workspace`  
-   - Select the project folder
+   - Select the project folder `Dsldesign`
+
 3. **Generate model code**  
-   - Right-click the `.genmodel` → *Generate Model Code*
+   - Navigate to the folder **`model/`**  
+   - Right-click the file **`iupac.genmodel`** → *Generate Model Code*
+
 4. **Create the Xtext project**  
    - `File → New → Project → Xtext Project From Existing Ecore Models`  
-   - Add the `.genmodel` file  
-   - Select the correct entry rule (root class, e.g. `IUPAC`)  
+   - Add the `.genmodel` file from the **`model/`** folder  
+   - Select the correct entry rule (root class, e.g. `IUPAC`)
+
 5. **Generate Xtext artifacts**  
-   - Right-click the `.xtext` grammar file → *Run As → Generate Xtext Artifacts*
+   - Navigate to **`src/`**  
+   - Right-click the DSL grammar file **`iupac.xtext`** → *Run As → Generate Xtext Artifacts*
+
 6. **Launch the DSL editor**  
-   - Right-click the project → *Run As → Eclipse Application*  
+   - Right-click the Xtext project → *Run As → Eclipse Application*  
    - A new Eclipse instance will open with the DSL editor installed
+
 7. **Create and test DSL files**  
-   - In the new Eclipse instance, create a project and add a file with the extension `.mydsl`  
-   - Start writing IUPAC-style names (e.g. `2-MonoMethylButan`)  
+   - In the new Eclipse instance, create a new project  
+   - Add a file with the extension `.mydsl` (e.g., `test.mydsl`)  
+   - Start writing IUPAC-style names such as:  
+     ```
+     2-MonoMethylButan
+     ```  
    - Use **Ctrl+Space** for autocompletion  
    - Errors will be highlighted if the syntax or semantics are incorrect
 
