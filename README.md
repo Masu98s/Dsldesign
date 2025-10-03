@@ -38,7 +38,7 @@ The DSL supports:
 
 - **Java 17**
 - **Gradle 7.x** (included via Gradle Wrapper)
-- **Eclipse Modeling Tools** (optional - only needed for model/grammar changes)
+- **Eclipse Modeling Tools** (optional - only needed for model/grammar changes or to have more use cases with the DSL code)
   - [Download Eclipse Modeling Tools](https://www.eclipse.org/downloads/packages/)
   - **OCL Plugin**: `Help → Install New Software` → `https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0`
   - **Xtext SDK**: `Help → Install New Software` → `https://download.eclipse.org/releases/2021-09/` → Search for "Xtext"
