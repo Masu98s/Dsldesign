@@ -76,6 +76,10 @@ Parse it:
 ```bash
 .\gradlew.bat :dsldesign.iupac.xtext:parseIupac "-Pfile=examples/test.iupac"
 ```
+**Note:** If the relative path doesn't work (PowerShell path issues), use the full absolute path:
+```bash
+.\gradlew.bat :dsldesign.iupac.xtext:parseIupac "-Pfile=C:\full\path\to\examples\test.iupac"
+```
 
 Output:
 ```
