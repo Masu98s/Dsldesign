@@ -209,30 +209,6 @@ For detailed Eclipse integration and the complete Xtext tutorial workflow, refer
 
 ---
 
-## Gradle Tasks
-
-```bash
-# Build everything
-.\gradlew.bat build
-
-# Clean build artifacts
-.\gradlew.bat clean
-
-# Generate EMF code only
-.\gradlew.bat :dsldesign.iupac:iupacModelCode
-
-# Generate Xtext infrastructure
-.\gradlew.bat :dsldesign.iupac.xtext:generateXtextLanguage
-
-# Parse IUPAC file
-.\gradlew.bat :dsldesign.iupac.xtext:parseIupac "-Pfile=examples/test.iupac"
-
-# List all tasks
-.\gradlew.bat tasks
-```
-
----
-
 ## Contributing
 
 1. Fork the repository
