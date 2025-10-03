@@ -47,12 +47,15 @@ The DSL supports:
 
 ## Quick Start
 
-### 1. Clone and Build
+### 1. Clone:
 
 ```bash
 git clone https://github.com/Masu98s/Dsldesign.git
 cd Dsldesign
+```
 
+### 2. Build:
+```bash
 # Build everything
 ./gradlew build          # Linux/Mac
 .\gradlew.bat build      # Windows
@@ -64,7 +67,7 @@ This automatically:
 - Generates Xtext parser from `MyDsl.xtext`
 - Compiles all Java sources
 
-### 2. Parse IUPAC Files
+### 3. Parse IUPAC Files
 
 Create a file `examples/test.iupac`:
 ```
