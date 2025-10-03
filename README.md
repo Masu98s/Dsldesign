@@ -204,8 +204,7 @@ For detailed Eclipse integration and the complete Xtext tutorial workflow, refer
 ```
 
 ---
-**For Eclipse-based workflow:** Refer to the Xtext tutorial PDF included with the book materials for comprehensive Eclipse development patterns.
-
+**For Eclipse-based workflow:** Refer to the Xtext tutorial-PDF from this repository.
 ---
 
 ## Troubleshooting
