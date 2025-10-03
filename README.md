@@ -169,7 +169,7 @@ For detailed Eclipse integration and the complete Xtext tutorial workflow, refer
 1. **Edit the model:**
    - Modify `dsldesign.iupac/model/iupac.ecore`
 
-2. **Regenerate EMF code:**
+2. **Regenerate model code:**
    ```bash
    .\gradlew.bat :dsldesign.iupac:iupacModelCode
    ```
