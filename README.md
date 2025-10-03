@@ -36,8 +36,8 @@ The DSL supports:
 
 ## Requirements
 
-- **Java 17** or newer
-- **Gradle 7.5+** (included via Gradle Wrapper)
+- **Java 17**
+- **Gradle 7.x** (included via Gradle Wrapper)
 - **Eclipse Modeling Tools** (optional - only needed for model/grammar changes)
   - [Download Eclipse Modeling Tools](https://www.eclipse.org/downloads/packages/)
   - **OCL Plugin**: `Help → Install New Software` → `https://download.eclipse.org/modeling/mdt/ocl/builds/release/6.20.0`
