@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUPAC Nomenclature Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+
+        .header {
+            background: #2d2d30;
+            padding: 12px 20px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #cccccc;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #1177bb;
+        }
+
+        button.secondary {
+            background: #3c3c3c;
+        }
+
+        button.secondary:hover {
+            background: #505050;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #editor {
+            flex: 1;
+        }
+
+        .panel {
+            width: 400px;
+            background: #252526;
+            border-left: 1px solid #3e3e42;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            padding: 10px 15px;
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            padding: 15px;
+        }
+
+        .output-section {
+            margin-bottom: 20px;
+        }
+
+        .output-section h3 {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .output-content {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 3px;
+            padding: 10px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .error {
+            color: #f48771;
+        }
+
+        .success {
+            color: #89d185;
+        }
+
+        .chain-item {
+            padding: 8px;
+            background: #2d2d30;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+
+        .status-bar {
+            background: #007acc;
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📝 IUPAC Nomenclature Editor</h1>
+        <div class="toolbar">
+            <button onclick="parseCode()">▶ Parse</button>
+            <button class="secondary" onclick="saveFile()">💾 Save</button>
+            <button class="secondary" onclick="loadExample()">📄 Example</button>
+            <button class="secondary" onclick="clearEditor()">🗑 Clear</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="editor-container">
+            <div id="editor"></div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">Output & Analysis</div>
+            <div class="panel-content">
+                <div class="output-section">
+                    <h3>Parse Result</h3>
+                    <div class="output-content" id="parseResult">
+                        Click "Parse" to validate your IUPAC code...
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <h3>Detected Chains</h3>
+                    <div id="chainsList">
+                        <div style="color: #888; font-size: 13px;">No chains parsed yet</div>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <h3>Command Line</h3>
+                    <div class="output-content" id="gradleCommand" style="font-size: 11px; color: #569cd6;">
+                        gradlew :dsldesign.iupac.xtext:parseIupac -Pfile=model.iupac
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <span>IUPAC DSL</span>
+        </div>
+        <div class="status-item" id="lineCol">
+            Ln 1, Col 1
+        </div>
+        <div class="status-item" id="charCount">
+            0 characters
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script>
+        let editor;
+
+        require.config({ 
+            paths: { 
+                vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' 
+            } 
+        });
+
+        require(['vs/editor/editor.main'], function() {
+            // Register IUPAC language
+            monaco.languages.register({ id: 'iupac' });
+
+            // Define syntax highlighting
+            monaco.languages.setMonarchTokensProvider('iupac', {
+                tokenizer: {
+                    root: [
+                        [/\d+/, 'number'],
+                        [/[A-Z][a-z]+/, 'type'],
+                        [/Mono|Di|Tri|Tetra|Penta|Hexa|Hepta|Octa|Nona|Deca/, 'keyword'],
+                        [/Meth|Eth|Prop|But|Pent|Hex|Hept|Oct|Non|Dec/, 'keyword.control'],
+                        [/an|en|yn|yl/, 'string'],
+                        [/-/, 'delimiter']
+                    ]
+                }
+            });
+
+            // Create editor
+            editor = monaco.editor.create(document.getElementById('editor'), {
+                value: `2-MonoMethylButan
+3-EthylHexan
+4,4-DiMethylHeptan`,
+                language: 'iupac',
+                theme: 'vs-dark',
+                fontSize: 14,
+                lineNumbers: 'on',
+                minimap: { enabled: true },
+                scrollBeyondLastLine: false,
+                automaticLayout: true
+            });
+
+            // Update status bar on cursor change
+            editor.onDidChangeCursorPosition((e) => {
+                document.getElementById('lineCol').textContent = 
+                    `Ln ${e.position.lineNumber}, Col ${e.position.column}`;
+            });
+
+            // Update character count on content change
+            editor.onDidChangeModelContent(() => {
+                const content = editor.getValue();
+                document.getElementById('charCount').textContent = 
+                    `${content.length} characters`;
+            });
+        });
+
+        function parseCode() {
+            const code = editor.getValue();
+            const lines = code.split('\n').filter(l => l.trim());
+            
+            const resultDiv = document.getElementById('parseResult');
+            const chainsDiv = document.getElementById('chainsList');
+            
+            if (lines.length === 0) {
+                resultDiv.innerHTML = '<span class="error">❌ Error: Empty file</span>';
+                chainsDiv.innerHTML = '<div style="color: #888;">No chains found</div>';
+                return;
+            }
+
+            // Simple validation
+            const chains = [];
+            let hasErrors = false;
+
+            lines.forEach((line, idx) => {
+                if (line.trim()) {
+                    // Basic pattern check
+                    if (/^\d+.*[a-zA-Z]+/.test(line)) {
+                        chains.push(line);
+                    } else {
+                        hasErrors = true;
+                    }
+                }
+            });
+
+            if (hasErrors) {
+                resultDiv.innerHTML = '<span class="error">❌ Parse errors found</span>';
+            } else {
+                resultDiv.innerHTML = `<span class="success">✅ Valid IUPAC file (${chains.length} chain${chains.length > 1 ? 's' : ''})</span>`;
+            }
+
+            // Display chains
+            if (chains.length > 0) {
+                chainsDiv.innerHTML = chains.map(chain => 
+                    `<div class="chain-item">🔗 ${chain}</div>`
+                ).join('');
+            } else {
+                chainsDiv.innerHTML = '<div style="color: #888;">No valid chains found</div>';
+            }
+        }
+
+        function saveFile() {
+            const code = editor.getValue();
+            const blob = new Blob([code], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'model.iupac';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            document.getElementById('parseResult').innerHTML = 
+                '<span class="success">✅ Saved as model.iupac</span>';
+        }
+
+        function loadExample() {
+            editor.setValue(`2-MonoMethylButan
+3-EthylHexan
+4,4-DiMethylHeptan
+2,3-DiMethylPentan
+5-PropylDecan`);
+            parseCode();
+        }
+
+        function clearEditor() {
+            editor.setValue('');
+            document.getElementById('parseResult').textContent = 'Editor cleared';
+            document.getElementById('chainsList').innerHTML = 
+                '<div style="color: #888;">No chains parsed yet</div>';
+        }
+
+        // Auto-parse on load
+        window.addEventListener('load', () => {
+            setTimeout(parseCode, 500);
+        });
+    </script>
+</body>
+</html>
