@@ -204,7 +204,7 @@ For detailed Eclipse integration and the complete Xtext tutorial workflow, refer
 ```
 
 ---
-**For Eclipse-based workflow:** Refer to the Xtext tutorial-PDF from this repository.
+**For Eclipse-based workflow:** Refer to the [Xtext_tutorial.pdf](https://github.com/Masu98s/Dsldesign/blob/main/Xtext_Tutorial.pdf) from this repository.
 ---
 
 ## Troubleshooting
