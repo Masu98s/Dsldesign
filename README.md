@@ -137,7 +137,6 @@ The Gradle-based parser validates IUPAC syntax:
 
 **Limitations:**
 - No OCL constraint validation (Eclipse-only feature)
-- Basic semantic checks only
 
 ### Web Editor
 
