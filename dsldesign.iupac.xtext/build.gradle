@@ -10,7 +10,7 @@ java {
 }
 
 dependencies {
-  implementation project (path: ':dsldesign.iupac', configuration: 'archives')
+  implementation project (':dsldesign.iupac')
   implementation project (':deps-xtext')
 	
   testImplementation "org.junit.jupiter:junit-jupiter-api"
@@ -19,14 +19,19 @@ dependencies {
 
 sourceSets {
   main {
-    java.srcDir 'src/main/xtext-gen'
-    xtendOutputDir = 'src/main/xtend-gen'
-    resources.srcDir 'src/main/xtext-gen'
+    java {
+      srcDirs = ['src', 'src-gen', 'xtend-gen']
+    }
+    resources {
+      srcDirs = ['src', 'src-gen']
+    }
   }
   test {
     java.srcDir 'src/test/xtext-gen'
     xtendOutputDir = 'src/test/xtend-gen'
     resources.srcDir 'src/test/xtext-gen'
+    compileClasspath += sourceSets.main.output  // ← Hinzufügen
+    runtimeClasspath += sourceSets.main.output  // ← Hinzufügen
   }
 }
 
@@ -34,9 +39,9 @@ jar {
   from('model') {
     into('model')
   }
-  from(sourceSets.main.allSource) {
-    include '**/*.xtext'
-  }
+  //from(sourceSets.main.allSource) {
+  //  include '**/*.xtext'
+  //}
   manifest {
     attributes 'Bundle-SymbolicName': project.name
   }
@@ -45,20 +50,41 @@ jar {
 task generateXtextLanguage (type: JavaExec) {
   mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
   classpath = configurations.compileClasspath
-  inputs.file "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"  // Changed
-  inputs.file "src/org/xtext/example/mydsl/MyDsl.xtext"         // Changed
+  inputs.file "src/dsldesign/iupac/xtext/mydsl/GenerateMyDsl.mwe2"  // Changed
+  inputs.file "src/dsldesign/iupac/xtext/mydsl/MyDsl.xtext"         // Changed
   outputs.dir "src-gen"
-  args += "src/org/xtext/example/mydsl/GenerateMyDsl.mwe2"      // Changed
+  args += "src/dsldesign/iupac/xtext/mydsl/GenerateMyDsl.mwe2"      // Changed
   args += "-p"
   args += "rootPath=/${rootProject.projectDir}"
 }
 
+compileJava.dependsOn (generateXtextLanguage)
+
+
+tasks.named("compileJava") {
+    source = files("src-gen", "xtend-gen", "src")
+}
+
 processResources.dependsOn (generateXtextLanguage)
 generateXtext.dependsOn (generateXtextLanguage)
-compileJava.dependsOn (generateXtextLanguage)
+
 clean.dependsOn (cleanGenerateXtextLanguage)
 
 afterEvaluate {
     tasks.findByName('generateTestXtext')?.enabled = false
     tasks.findByName('generateXtext')?.enabled = false
+}
+
+task parseIupac(type: JavaExec) {
+    group = 'dsl'
+    description = 'Parse an IUPAC file'
+    mainClass = 'dsldesign.iupac.xtext.test.IupacParser'
+    classpath = sourceSets.main.runtimeClasspath  // ← main statt test
+    
+    if (project.hasProperty('file')) {
+        args = [project.property('file')]
+    }
+}
+tasks.named('parseIupac') {
+    dependsOn 'generateXtextLanguage', 'classes', ':dsldesign.iupac:jar'
 }

@@ -31,7 +31,7 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
-			name = "org.xtext.example.mydsl.MyDsl"
+			name = "dsldesign.iupac.xtext.mydsl.MyDsl"
 			fileExtensions = "iupac"
 			referencedResource = "file://${rootPath}/dsldesign.iupac/model/iupac.genmodel"
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
