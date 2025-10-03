@@ -209,29 +209,6 @@ For detailed Eclipse integration and the complete Xtext tutorial workflow, refer
 
 ---
 
-## Troubleshooting
-
-
-**Parse Error: "loop did not match anything"**
-- Ensure your `.iupac` file contains at least one valid chain
-- Check grammar syntax in `MyDsl.xtext`
-
-**Eclipse Shows Errors but Gradle Builds Successfully**
-- Eclipse errors are IDE configuration issues, not code problems
-- These don't affect Gradle builds
-- Can be safely ignored if using Gradle-only workflow
-
-**OCL Constraints Not Validated**
-- OCL requires Eclipse Runtime environment
-- Not available in standalone Gradle parser
-- Use Eclipse Application launch for full validation
-
-**Parser Can't Find Input File**
-- Use absolute path: `-Pfile=C:\full\path\to\file.iupac`
-- Or ensure working directory is project root
-
----
-
 ## Gradle Tasks
 
 ```bash
